@@ -55,7 +55,7 @@ See 'docs/license_notes.md' for details.
 │
 ├── notebooks/
 │   ├── 01_build_kg.ipynb    # NetworkX KG build + visualization
-│   └── 03_rgcn_train_eval.ipynb  # R-GCN training + explanation demo
+│   └── 02_rgcn_train_eval.ipynb  # R-GCN training + explanation demo
 │
 ├── src/
 │   ├── build_kg.py          # CSV → NetworkX graph pipeline
