@@ -121,10 +121,4 @@ Outputs typically include:
 
 ● A minimal explanation trace (rule activation + path)
 
-**Author:**
 
-Aman Moon
-
-MTech,
-
-Indian Institute of Technology Kharagpur
