@@ -44,6 +44,11 @@ It only has hand-curated labels and synthetic edges for prototyping.
 
 See 'docs/license_notes.md' for details.
 
+**Architecture Diagram:**
+
+<img width="861" height="361" alt="MTP_ARCHITECTURE drawio" src="https://github.com/user-attachments/assets/e98f9192-d5bd-4853-8c09-5f5b3698eb8d" />
+
+
 **Repository Structure:**
 
 ```bash
