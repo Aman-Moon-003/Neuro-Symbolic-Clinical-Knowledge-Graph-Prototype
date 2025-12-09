@@ -1,0 +1,62 @@
+[
+  {
+    "candidate_id": "129266000",
+    "candidate_name": "Measurement_action",
+    "raw_score": 0.0020402532536536455,
+    "paths": []
+  },
+  {
+    "candidate_id": "2095001",
+    "candidate_name": "Nasal_sinus_structure",
+    "raw_score": -0.001995079219341278,
+    "paths": []
+  },
+  {
+    "candidate_id": "54066008",
+    "candidate_name": "Pharyngeal_structure",
+    "raw_score": -0.002651386894285679,
+    "paths": []
+  },
+  {
+    "candidate_id": "52653008",
+    "candidate_name": "Respiratory_sounds",
+    "raw_score": -0.0032590865157544613,
+    "paths": []
+  },
+  {
+    "candidate_id": "67776007",
+    "candidate_name": "Monocyte_count",
+    "raw_score": -0.0034032543189823627,
+    "paths": []
+  },
+  {
+    "candidate_id": "78064003",
+    "candidate_name": "Respiratory_function",
+    "raw_score": -0.0035172398202121258,
+    "paths": []
+  },
+  {
+    "candidate_id": "321667001",
+    "candidate_name": "Respiratory_tract_structure",
+    "raw_score": -0.0035366008523851633,
+    "paths": []
+  },
+  {
+    "candidate_id": "386725007",
+    "candidate_name": "Body_temperature",
+    "raw_score": -0.003663994837552309,
+    "paths": []
+  },
+  {
+    "candidate_id": "80873004",
+    "candidate_name": "Oxyhemoglobin",
+    "raw_score": -0.00383792445063591,
+    "paths": []
+  },
+  {
+    "candidate_id": "123819004",
+    "candidate_name": "Cough_reflex_absent",
+    "raw_score": -0.003981276415288448,
+    "paths": []
+  }
+]

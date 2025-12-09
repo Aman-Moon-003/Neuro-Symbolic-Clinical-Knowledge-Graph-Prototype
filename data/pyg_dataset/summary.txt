@@ -1,0 +1,6 @@
+nodes: 268
+train triples: 249
+valid triples: 1
+test triples: 20
+feature dim: 128
+relations: 8

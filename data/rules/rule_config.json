@@ -1,0 +1,49 @@
+{
+  "rules": [
+    {
+      "name": "pneumonia_has_inflammation",
+      "type": "implies",
+      "weight": 2.0,
+      "premise": {
+        "concept": "233604007",
+        "relation": "Associated_Morphology"
+      },
+      "conclusion": {
+        "concept": "409774005"
+      }
+    },
+    {
+      "name": "pneumonia_causes_consolidation",
+      "type": "implies",
+      "weight": 1.5,
+      "premise": {
+        "concept": "233604007",
+        "relation": "Finding_Site"
+      },
+      "conclusion": {
+        "concept": "9656002"
+      }
+    },
+
+    {
+      "name": "pneumonia_and_hypoxia_imply_severe",
+      "type": "and_implies",
+      "weight": 2.5,
+      "premise": [
+        { "concept": "233604007" },
+        { "concept": "389086002" }
+      ],
+      "conclusion": {
+        "concept": "233604007"
+      }
+    },
+
+    {
+      "name": "viral_pneumonia_implies_not_bacterial",
+      "type": "implies_not",
+      "weight": 1.0,
+      "premise": { "concept": "75570004" },
+      "conclusion": { "concept": "409822003" }
+    }
+  ]
+}
