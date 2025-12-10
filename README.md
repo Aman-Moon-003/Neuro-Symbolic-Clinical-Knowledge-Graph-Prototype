@@ -47,7 +47,8 @@ See 'docs/license_notes.md' for details.
 **Architecture Diagram:**
 
 
-<img width="1118" height="522" alt="ARCHITECTURE_DIAGRAM" src="https://github.com/user-attachments/assets/162dafc2-885f-421c-9461-7703d46a8000" />
+<img width="1003" height="421" alt="image" src="https://github.com/user-attachments/assets/5c861e26-8122-4e20-8913-85bb7f36817b" />
+
 
 
 **Explanation Module Diagram:**
