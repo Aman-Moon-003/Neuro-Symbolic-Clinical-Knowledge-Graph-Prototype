@@ -46,77 +46,60 @@ See 'docs/license_notes.md' for details.
 
 **Architecture Diagram:**
 
-<img width="861" height="361" alt="MTP_ARCHITECTURE drawio" src="https://github.com/user-attachments/assets/e98f9192-d5bd-4853-8c09-5f5b3698eb8d" />
+
+<img width="1118" height="522" alt="ARCHITECTURE_DIAGRAM" src="https://github.com/user-attachments/assets/162dafc2-885f-421c-9461-7703d46a8000" />
+
+
+**Explanation Module Diagram:**
+
+
+<img width="1060" height="547" alt="EXPLANATION_MODULE_ARCHITECTURE" src="https://github.com/user-attachments/assets/fa6f1112-72cf-413c-9ade-fbf1d181b289" />
 
 
 **Repository Structure:**
 
 ```bash
 ├── data/
-│   ├── seeds.csv            # selected respiratory concepts (labels or SCTIDs)
-│   ├── entities.csv         # prototype node list
-│   ├── triples.csv          # prototype edge list
-│   └── node_feats.npy       # BERT-derived node embeddings (or created via script)
-│
-├── notebooks/
-│   ├── 01_build_kg.ipynb    # NetworkX KG build + visualization
-│   └── 02_rgcn_train_eval.ipynb  # R-GCN training + explanation demo
+│   ├── out
+│   │    └──pneumonia_1hop
+│   │           ├── legend.png
+│   │           ├── kg.gml
+│   │           └── kg.png
+│   ├── pyg_dataset
+│   │        ├── summary.txt
+│   │        ├── explanations.json
+│   │        ├── test_triples.pt
+│   │        ├── node_feats.npy
+│   │        ├── train_triples.pt
+│   │        └── valid_triples.pt
+│   └── rules
+│        └── rule_config.json
 │
 ├── src/
-│   ├── build_kg.py          # CSV → NetworkX graph pipeline
-│   ├── features.py          # node feature generator using sentence transformers
-│   ├── pyg_loader.py        # load CSV → PyG tensors
-│   ├── models.py            # R-GCN model class + scoring head
-│   ├── rules.py             # fuzzy logic rule loss functions
-│   └── explain.py           # simple explanation extraction utilities
-│
-├── rules/
-│   └── rules.json           # 5–10 clinical rules for the neuro-symbolic layer
+│   ├── convert_nodes_edges.py
+│   ├── validate_kg.py
+│   ├── Filter_Relations.py
+│   ├── visualize_kg.py
+│   ├── safe_split.py
+│   ├── create_node_features.py
+│   ├── dataset.py
+│   ├── update_dataset_features.py
+│   ├── rule_engine.py
+│   ├── train_rgcn.py
+│   ├── explain.py
+│   └── interactive_explain.py
 │
 ├── docs/
-│   ├── architecture.md      # system diagram + rationale
-│   ├── license_notes.md     # SNOMED compliance notes
-│   └── meeting_script.md    # short pitch + demo walkthrough
+│   └── ARCHITECTURE_DIAGRAM.png
 │
+├── EXPLANATION_MODULE_ARCHITECTURE.png
+├── LICENSE.md
 ├── requirements.txt
 └── README.md
 ```
 
-**Quick Start:**
 
-1️⃣ To install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-2️⃣ To build the Knowledge Graph using NetworkX
-
-```bash
-python src/build_kg.py \
-    --entities data/entities.csv \
-    --triples data/triples.csv \
-    --out fig/kg_static.png
-```
-
-3️⃣ To generate Node Features using Bio/Clinical BERT
-
-```bash
-python src/features.py \
-    --entities data/entities.csv \
-    --out data/node_feats.npy
-```
-
-4️⃣ To train a minimal R-GCN demo:
-
-```bash
-python src/train_demo.py \
-    --entities data/entities.csv \
-    --triples data/triples.csv \
-    --feats data/node_feats.npy
-```
-
-Outputs typically include:
+**Outputs typically include:**
 
 ● Node embeddings
 
