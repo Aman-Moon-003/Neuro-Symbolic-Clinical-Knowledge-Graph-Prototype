@@ -1,16 +1,10 @@
-#!/usr/bin/env python3
+
 """
 Create node feature matrix for entities.csv aligned with entity order.
 
 Outputs:
  - node_feats.npy    (N x D)
  - node_feats_meta.json (info about dims and used models)
-
-Features options:
- - textual embeddings via sentence-transformers (default: all-mpnet-base-v2)
- - optional node2vec structural embeddings (default: off)
- - optional PCA reduction and L2 normalization
- - concatenation of text + node2vec if both used
 
 """
 import argparse
@@ -166,3 +160,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
