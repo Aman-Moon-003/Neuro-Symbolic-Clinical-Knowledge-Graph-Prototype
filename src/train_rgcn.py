@@ -1,16 +1,6 @@
-#!/usr/bin/env python3
-"""
-Train a Relational Graph Convolutional Network (R-GCN) for link prediction
-on your SNOMED-based clinical knowledge graph.
 
-Usage:
-    python src/train_rgcn.py \
-        --dataset_dir data/pyg_dataset \
-        --save_dir checkpoints/rgcn \
-        --epochs 50 \
-        --hidden_dim 128 \
-        --lr 1e-3 \
-        --neg_ratio 10
+"""
+Train a Relational Graph Convolutional Network (R-GCN) for link prediction on SNOMED-based clinical knowledge graph.
 
 """
 
@@ -210,8 +200,8 @@ def main():
     with open(os.path.join(args.dataset_dir, "id2idx.json")) as f:
         id2idx = json.load(f)
 
-    # Initialize RuleEngine (learnable). emb_dim should equal the model output embedding dim.
-    # model.encode(...) outputs vectors of size hidden_dim, so set emb_dim = args.hidden_dim
+    # Initialize RuleEngine, emb_dim should equal the model output embedding dim.
+    # model.encode() outputs vectors of size hidden_dim, so set emb_dim = args.hidden_dim.
     rule_engine = RuleEngine(
         rule_config_path=r"C:\Users\AMAN\Documents\MTech Thesis Projects\Neuro-Symbolic Clinical Knowledge Graph Prototype\data\rules\rule_config.json",
         id2idx=id2idx,
@@ -268,3 +258,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
