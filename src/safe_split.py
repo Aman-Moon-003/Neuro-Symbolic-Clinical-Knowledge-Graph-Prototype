@@ -2,17 +2,8 @@
 
 Create safe train/val/test splits for KG triples preserving:
  - minimum training examples per relation
- - no node leakage: every node in val/test appears in training (unless allow_inductive_test=True)
- - training graph weakly connected (attempt to ensure)
-
-Usage:
-    python src/safe_split.py
-      --triples data/filtered/triples.filtered.csv
-      --out_dir data/splits
-      --min_train_per_rel 3
-      --val_frac 0.1
-      --test_frac 0.1
-      --seed 42
+ - no node leakage: every node in val/test appears in training
+ - training graph weakly connected
 
 Outputs (written to out_dir):
     train.csv (head,rel,tail)
@@ -133,11 +124,10 @@ def main():
             if args.allow_inductive_test or nodes_in_train(h,t):
                 val.append((h,rel,t)); assigned=True
         if not assigned:
-            # can't safely put into val/test (would create unseen nodes) -> put into train
+            # can't safely put into val/test and would create unseen nodes -> put into train
             train.append((h,rel,t))
             train_nodes.add(h); train_nodes.add(t)
 
-    # After first pass, if val/test are below targets because of safety, it's fine; we prefer safety.
     print(f"[INFO] After first pass: train={len(train)}, val={len(val)}, test={len(test)} (targets val={n_val_target}, test={n_test_target})")
 
     # 3) Ensure training graph is weakly connected (single weak component)
@@ -251,3 +241,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
