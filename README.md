@@ -42,7 +42,7 @@ This repository does not contain:
 
 It only has hand-curated labels and synthetic edges for prototyping.
 
-See 'docs/license_notes.md' for details.
+See 'docs/license_notes' for details.
 
 **Architecture Diagram:**
 
@@ -91,10 +91,10 @@ See 'docs/license_notes.md' for details.
 │   └── interactive_explain.py
 │
 ├── docs/
+│   ├── EXPLANATION_MODULE_ARCHITECTURE.png
 │   └── ARCHITECTURE_DIAGRAM.png
 │
-├── EXPLANATION_MODULE_ARCHITECTURE.png
-├── LICENSE.md
+├── LICENSE
 ├── requirements.txt
 └── README.md
 ```
