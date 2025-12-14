@@ -1,19 +1,14 @@
-#!/usr/bin/env python3
+
 """
 
 Convert nodes.csv + edges.csv into:
 
     - entities.csv   (entity_id, name)
     - triples.csv    (head, rel, tail)
-    - concept_meta.json  (optional metadata dump)
 
-This script is customized for the schema you uploaded:
-
-nodes.csv columns:
-    id,name,semantic_tag
-
-edges.csv columns:
-    source,relation,target
+The schema:
+nodes.csv columns: id,name,semantic_tag
+edges.csv columns: source,relation,target
 
 """
 
@@ -33,7 +28,7 @@ def main():
     os.makedirs(args.out_dir, exist_ok=True)
 
     # -----------------------------------------------------------
-    # 1. Load nodes.csv (schema already known)
+    # 1. Load nodes.csv
     # -----------------------------------------------------------
     nodes = pd.read_csv(args.nodes, dtype=str)
     required_node_cols = {"id", "name", "semantic_tag"}
@@ -50,7 +45,7 @@ def main():
     nodes["name"] = nodes["name"].str.strip()
 
     # -----------------------------------------------------------
-    # 2. Load edges.csv (schema also known)
+    # 2. Load edges.csv
     # -----------------------------------------------------------
     edges = pd.read_csv(args.edges, dtype=str)
     required_edge_cols = {"source", "relation", "target"}
@@ -67,7 +62,7 @@ def main():
     edges["target"] = edges["target"].str.strip()
 
     # -----------------------------------------------------------
-    # 3. Build entities.csv (id,name)
+    # 3. Build entities.csv
     # -----------------------------------------------------------
     entities = nodes[["id", "name"]].drop_duplicates().reset_index(drop=True)
 
@@ -83,7 +78,7 @@ def main():
         entities = pd.concat([entities, missing_df], ignore_index=True)
 
     # -----------------------------------------------------------
-    # 4. Build triples.csv (head,rel,tail)
+    # 4. Build triples.csv
     # -----------------------------------------------------------
     triples = edges.rename(columns={
         "source": "head",
@@ -103,23 +98,6 @@ def main():
     print(f"[OK] Wrote {entities_path} ({len(entities)} rows)")
     print(f"[OK] Wrote {triples_path} ({len(triples)} triples)")
 
-    # -----------------------------------------------------------
-    # 6. Optionally save metadata JSON
-    # -----------------------------------------------------------
-    if args.meta:
-        meta = {}
-        for _, row in nodes.iterrows():
-            cid = row["id"]
-            meta[cid] = {
-                "name": row["name"],
-                "semantic_tag": row["semantic_tag"]
-            }
-
-        meta_path = os.path.join(args.out_dir, "concept_meta.json")
-        with open(meta_path, "w", encoding="utf-8") as f:
-            json.dump(meta, f, indent=2, ensure_ascii=False)
-
-        print(f"[OK] Wrote {meta_path}")
-
 if __name__ == "__main__":
     main()
+
