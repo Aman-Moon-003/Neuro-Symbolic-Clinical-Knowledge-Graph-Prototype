@@ -1,18 +1,15 @@
-#!/usr/bin/env python3
+
 """
 Visualize a SNOMED-subgraph KG using NetworkX + matplotlib.
 
 Inputs:
- - entities.csv (columns: id,name,semantic_tag (optional))
+ - entities.csv (columns: id,name,semantic_tag)
  - triples.csv OR triples.filtered.csv (columns: head,rel,tail)
 
 Outputs:
  - out/kg.png          (visual PNG)
  - out/kg.gml          (graph file; open in Gephi)
  - out/legend.png      (optional legend image)
-
-Example usage:
-python src/visualize_kg.py --entities data/entities.csv --triples data/filtered/triples.filtered.csv --focus 233604007 --radius 2 --show_edge_labels --out_dir out
 
 """
 
@@ -30,7 +27,6 @@ def read_entities(path):
         raise ValueError("entities.csv must contain 'id' and 'name' columns")
     df["id"] = df["id"].astype(str).str.strip()
     df["name"] = df["name"].astype(str).str.strip()
-    # optional semantic_tag
     if "semantic_tag" not in df.columns:
         df["semantic_tag"] = ""
     else:
@@ -213,3 +209,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
