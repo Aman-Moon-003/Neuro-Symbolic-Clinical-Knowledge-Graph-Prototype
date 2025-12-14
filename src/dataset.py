@@ -1,17 +1,10 @@
 """
+
 Load entities.csv + train/valid/test triples and produce:
  - id2idx.json, rel2id.json
  - data.pth (torch_geometric.data.Data) with x, edge_index, edge_type for training graph
  - split tensors for evaluation: train_triples.pt, valid_triples.pt, test_triples.pt
 
-Usage:
-    python src/dataset.py --entities data/converted/entities.csv
-        --train data/train_val_test/train.csv
-        --valid data/train_val_test/valid.csv
-        --test data/train_val_test/test.csv
-        --feats data/converted/node_feats.npy
-        --out_dir data/pyg_dataset
-        --feat_dim 128
 """
 
 import argparse
@@ -80,7 +73,7 @@ def triples_to_idx(triples_df: pd.DataFrame, id2idx: dict, rel2id: dict, add_mis
                     id2idx[h] = len(id2idx)
                 if t not in id2idx:
                     id2idx[t] = len(id2idx)
-        # After optional addition, if still missing raise error
+        # After addition, if still missing raise error
         if h not in id2idx or t not in id2idx:
             raise KeyError(f"Node id missing in entities mapping: head={h} or tail={t}")
         heads.append(id2idx[h])
@@ -189,3 +182,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
