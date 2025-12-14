@@ -1,18 +1,21 @@
 # Neuro-Symbolic-Clinical-Knowledge-Graph-Prototype
-This repository is academically oriented prototype for MTech Thesis at IIT KGP.
+This repository is a prototype created as a component of a MTech thesis at IIT Kharagpur. It examines neuro-symbolic reasoning over clinical knowledge graphs with a focus on repeatability, interpretability, and logical consistency. It is designed for controlled experimentation rather than production deployment, the solution is purposefully simple and modular.
 
-It contains following features:
 
-● A small hand curated cinically-aligned knowledge graph build by using SNOMED-CT browser.
+**Scope and Contribution:**
 
-● Integrated the Relational Graph Convolutional Network (R-GCN).
+This prototype illustrates:
 
-● Fuzzy clinical rules for neuro-symbolic reasoning.
+● Building a therapeutically matched knowledge graph with SNOMED-CT concepts
 
-● Minimal reproducible workflow with no UI components.
+● Reasoning across multi-relational clinical graphs using Relational Graph Convolutional Networks (R-GCN)
 
-Once SNOMED-CT RF2 access is approved, the current manually curated graph will be replaced by an RF2-derived KG.
-This repo intentionally focuses on clarity, reproducibility, and scientific structure rather than UI/production engineering.
+● Using Łukasiewicz t-norms as soft logical constraints to integrate fuzzy clinical rules
+
+● Creation of human-readable explanation trails that connect graph routes and rules to forecasts
+
+The system is intended to investigate how neural reasoning in clinical knowledge graphs is influenced by symbolic limitations.
+
 
 **Research Goals:**
 
@@ -22,27 +25,35 @@ This prototype supports the thesis:
 
 The objectives are:
 
-● To build a clinically meaningful KG using SNOMED-CT concepts.
+● Create a knowledge graph based on SNOMED-CT that has clinical significance.
 
-● To train R-GCN or similar GNN models.
+● Use R-GCN or similar GNNs to learn relational representations.
 
-● To integrate fuzzy logic rules using Łukasiewicz t-norms.
+● Use differentiable fuzzy rules to enforce clinical reasoning
 
-● To provide simple and human readable reasoning explanations.
+● Boost interpretability and logical coherence
+
 
 **SNOMED CT Licensing Notes:**
 
-This repository does not contain:
+This repository does not include:
 
-● SNOMED CT RF2 files.
+● SNOMED-CT RF2 files
 
-● Raw SNOMED distributions.
+● Official SNOMED-CT distributions
 
-● Redistributable SNOMED components.
+● Redistributable SNOMED content
 
-It only has hand-curated labels and synthetic edges for prototyping.
+All included data consists solely of:
 
-See 'docs/license_notes' for details.
+● Hand-curated concept identifiers and labels
+
+● Synthetic or manually constructed edges
+
+● Research-only artifacts for prototyping
+
+Upon approval of SNOMED-CT RF2 access, the current KG will be replaced with an RF2-derived knowledge graph.
+
 
 **Architecture Diagram:**
 
@@ -100,14 +111,63 @@ See 'docs/license_notes' for details.
 ```
 
 
-**Outputs typically include:**
+**How to run (minimal):**
 
-● Node embeddings
+1. Environment Setup:
+   ```bash
+   git clone <repository-url>
+   cd Neuro-Symbolic-Clinical-Knowledge-Graph-Prototype
+   python -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+   
+2. Visualize the Knowledge Graph(KG):
+   ```bash
+   python src/validate_kg.py
+   ```
+   Checks structural consistency of nodes, relations, and edge types.
+   
+3. Prepare the dataset:
+   ```bash
+   python src/create_node_features.py
+   python src/safe_split.py
+   ```
+   Generates node features and reproducible train/validation/test splits.
+   
+4. Train the R-GCN model:
+   ```bash
+   python src/train_rgcn.py
+   ```
+   Trains an R-GCN with integrated fuzzy rule loss.
+   
+5. Generate explanations:
+    ```bash
+    python src/explain.py
+   ```
+   Produces minimal explanation traces, including activated rules and supporting KG paths.
+    
 
-● Link prediction scores
+**Outputs:**
 
-● Rule-loss values
+● Acquired knowledge about node embeddings
 
-● A minimal explanation trace (rule activation + path)
+● Scores for link prediction
+
+● Statistics on rule-violation (rule-loss)
+
+● Explanation traces (graph pathways + rules)
+
+Outputs are kept in data/pyg_dataset/
 
 
+**Design Philosophy:**
+
+● Research-first: Prioritize research over engineering complexity to ensure clarity and reproducibility.
+
+● Interpretable: Clear guidelines and traces of explanation
+
+● Modular: Parts can be added or changed on their own
+
+
+Clinical deployment is not the intended use of this repository.
