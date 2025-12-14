@@ -170,10 +170,12 @@ def main():
     rel2id = load_json(os.path.join(args.dataset_dir, "rel2id.json"))
 
     print("[INFO] loading dataset tensors...")
+    
     '''pth_path = os.path.join(dataset_dir, "data_with_features.pth")
     # allowlist the PyG DataEdgeAttr class while loading
     with serialization.add_safe_globals([DataEdgeAttr]):
         data = torch.load(pth_path, map_location="cpu", weights_only=False)'''
+    
     try:
         from torch_geometric.data.data import DataEdgeAttr
         from torch_geometric.data import Data as PyGData
@@ -210,10 +212,6 @@ def main():
     print("[INFO] Loaded object type:", type(data))
     if isinstance(data, dict):
         print("[INFO] Top-level keys:", list(data.keys()))
-    # Common variants:
-    # - data is a dict containing 'x','edge_index','edge_type'
-    # - data is a dict: {'data_obj': Data(...), 'x':..., ...}
-    # - data is a PyG Data object directly
 
     # Extract x, edge_index, edge_type robustly
     if isinstance(data, dict):
@@ -300,7 +298,7 @@ def main():
     model.load_state_dict(sd, strict=True)
     model = model.to(device).eval()
 
-    # *** THE IMPORTANT OPTION B FIX ***
+    # *** THE IMPORTANT FIX ***
     print("[INFO] Using model.emb.weight as node features (Option B).")
     x_use = model.emb.weight.to(device)
 
@@ -351,3 +349,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
