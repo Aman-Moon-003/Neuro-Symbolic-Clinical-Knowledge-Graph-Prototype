@@ -4,20 +4,10 @@
 Filter / merge / repurpose rare relations in triples.csv
 
 # 1) Drop relations that appear fewer than min_count (e.g. 3)
-python src/filter_relations.py --triples data/triples.csv --out_dir data/filtered --mode drop --min_count 3
 
 # 2) Merge rare relations into a generic label "OTHER"
-python src/filter_relations.py --triples data/triples.csv --out_dir data/filtered --mode merge --min_count 3 --merge_label OTHER
 
 # 3) Repurpose rare relations into a separate file (kept for explanation only)
-python src/filter_relations.py --triples data/triples.csv --out_dir data/filtered --mode repurpose --min_count 3
-
-Notes:
- - The script preserves order of rows.
- - It writes:
-    * filtered/triples.csv       -> triples for training (depending on mode)
-    * filtered/rare_triples.csv  -> triples considered rare (if repurpose or merge)
-    * filtered/report.txt        -> human-readable summary
     
 """
 
@@ -93,8 +83,7 @@ def main():
     p.add_argument("--triples", required=True, help="Path to triples.csv (head,rel,tail)")
     p.add_argument("--out_dir", required=True, help="Output folder")
     p.add_argument("--min_count", type=int, default=3, help="Minimum frequency for a relation to be considered 'frequent'")
-    p.add_argument("--mode", choices=["drop","merge","repurpose"], default="repurpose",
-                   help="What to do with rare relations: drop them, merge them to a generic rel, or repurpose into a separate file")
+    p.add_argument("--mode", choices=["drop","merge","repurpose"], default="repurpose", help="What to do with rare relations: drop them, merge them to a generic rel, or repurpose into a separate file")
     p.add_argument("--merge_label", default="OTHER", help="If mode=merge, label to use for merged rare relations")
     p.add_argument("--normalize", action="store_true", help="Normalize relation names (case/spacing fixes)")
     args = p.parse_args()
@@ -149,3 +138,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
