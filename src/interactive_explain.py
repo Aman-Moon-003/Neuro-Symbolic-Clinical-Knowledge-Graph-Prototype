@@ -3,7 +3,7 @@
 This script:
  - Load trained R-GCN checkpoint correctly
  - Uses the correct model_state_dict
- - Uses learned embeddings (Option B)
+ - Uses learned embeddings
  - Performs BFS path search (3 hops)
  - Scores reachable nodes only
  - Prints clean explanations
@@ -123,7 +123,7 @@ def main():
     num_rel = len(rel2id)
 
     # ---------------------------------------------------------
-    # LOAD CHECKPOINT — FIX FOR YOUR MODEL
+    # LOAD CHECKPOINT — FIX THE MODEL
     # ---------------------------------------------------------
     '''ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
 
@@ -187,7 +187,6 @@ def main():
     found_rel = any("rel_emb.weight" in k for k in sd.keys())
     if not (found_emb and found_rel):
         print("[DEBUG] After normalization, state_dict keys (sample 60):", list(sd.keys())[:60])
-        # don't abort yet — some models use different names. We'll attempt to infer dims safely later.
     else:
         print("[INFO] Found emb/rel keys in state_dict (good).")
     # ---------------- end robust extraction ----------------
@@ -211,7 +210,7 @@ def main():
     model.eval()
 
     # ---------------------------------------------------------
-    # OPTION B — USE TRAINED EMBEDDINGS (IGNORE x FEATURES)
+    # USE TRAINED EMBEDDINGS (IGNORE x FEATURES)
     # ---------------------------------------------------------
     print("[INFO] Using model.emb.weight as node features")
     x_use = model.emb.weight
@@ -263,3 +262,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
